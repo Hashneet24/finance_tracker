@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'finance/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Personal Finance Tracker</h1>
+        <nav>
+            <a href="{% url 'category-list' %}">Categories</a> |
+            <a href="{% url 'transaction-list' %}">Transactions</a> |
+            <a href="{% url 'budget-list' %}">Budgets</a> |
+            <a href="{% url 'transaction-add' %}">Add Transaction</a>
+
+            {% if user.is_authenticated %}
+                <p>Hi {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        <h2>Welcome to your Personal Finance Tracker!</h2>
+        <p>Total Income: {{ total_income }}</p>
+        <p>Total Expenses: {{ total_expense }}</p>
+        <p>Balance: {{ balance }}</p>
+        {% if alerts %}
+    <div style="background-color:#ffe6e6; border:1px solid #ff4d4d; padding:10px; margin-bottom:15px;">
+        {% for alert in alerts %}
+            <p style="color: #cc0000; font-weight: bold;">{{ alert }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+    </main>
+    
+</body>
+</html>

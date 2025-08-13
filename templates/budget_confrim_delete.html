@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delete Budget</title>
+</head>
+<body>
+  <header>
+    <h1>Delete Budget</h1>
+    <nav>
+      <a href="{% url 'home' %}">Home</a> |
+      <a href="{% url 'budget-list' %}">Budgets</a>
+    </nav>
+  </header>
+
+  <main>
+    <p>Are you sure you want to delete the budget for <strong>{{ budget.category.name }}</strong> for {{ budget.budget_month }}/{{ budget.budget_year }}?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Confirm Delete</button>
+      <a href="{% url 'budget-list' %}">Cancel</a>
+    </form>
+  </main>
+</body>
+</html>

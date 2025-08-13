@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+</head>
+<body>
+    <header>
+        <h1>Categories</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a> |
+            <a href="{% url 'transaction-list' %}">Transactions</a>|
+            <a href="{% url 'budget-list' %}">Budgets</a>|
+            <a href="{% url 'category-add' %}">Add Category</a>
+        </nav>
+    </header>
+
+    <main>
+        <ul>
+            {% for category in categories %}
+                <li>{{category.name}} ({{category.type}})
+                <a href="{% url 'category-edit' category.pk %}">Edit</a>
+                <a href="{% url 'category-delete' category.pk %}">Delete</a>
+                </li>
+
+            {% empty %}
+                <li>No categories found.</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
